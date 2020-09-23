@@ -6,10 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +33,16 @@ public class IPController {
     public List<IPLocation> getIpLocation(){
         return ipService.getIpDetails();
     }
+
+    @RequestMapping(value = "/ipinfo", method = RequestMethod.DELETE)
+    public void deleteIpInfo(@RequestParam("ip") String ip) {
+        ipService.deleteIpDetails(ip);
+    }
+
+    @PutMapping(value = "/ipinfo")
+    public void updateIpInfo(@RequestBody IPLocation ipLocation){
+        ipService.updateIpInfo(ipLocation);
+    }
+
 
 }
